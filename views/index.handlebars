@@ -70,8 +70,6 @@
   selector.addEventListener('change', () => {
     const selectorValue = selector.value
 
-    console.log(selector.value)
-
     axios.get(`/filterData/${selectorValue}`)
       .then(resData => {
         recordShow.innerHTML = ''
