@@ -1,7 +1,7 @@
 
 const express = require('express')
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 const app = express()
 
@@ -24,8 +24,10 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 // 資料庫設定
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/todo-list'
 const mongoose = require('mongoose') // 載入 mongoose
-mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
+
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
