@@ -1,12 +1,12 @@
 <div class="row mt-5">
   <div class="col-md-8">
-    <select class="custom-select">
-      <option selected>類別</option>
-      <option value="1">家居物業</option>
-      <option value="2">交通出行</option>
-      <option value="3">休閒娛樂</option>
-      <option value="4">餐飲娛樂</option>
-      <option value="5">其他</option>
+    <select class="custom-select" id="filterSelector">
+      <option value="99" selected>類別</option>
+      <option value="0">家居物業</option>
+      <option value="1">交通出行</option>
+      <option value="2">休閒娛樂</option>
+      <option value="3">餐飲娛樂</option>
+      <option value="4">其他</option>
     </select>
   </div>
 </div>
@@ -16,117 +16,39 @@
     <div class="h3">總金額</div>
   </div>
   <div class="col-md-4 ">
-    <div class="h2 text-danger">25260</div>
+    <div class="h2 text-danger" id="amountShow">{{recordAmount}}</div>
   </div>
 </div>
 
-<div class="row mt-3 border-bottom">
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;"><i
-      class="fas fa-utensils"></i></div>
-  <div class="col-md-6">
-    <div>午餐</div>
-    <div>2019/04/23</div>
-  </div>
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">60</div>
-  <div class="col-md-2  text-center align-items-center"
-    style="display: flex; align-items: center; justify-content: center;">
-    <a href="/edit" class="btn btn-info" id="">修改</a>
-  </div>
-  <div class="col-md-2 text-center" style="display: flex; align-items: center; justify-content: center;">
-    <form action="/delete" method="POST">
-      <button class="btn btn-danger" type="submit"
-        style="display: flex; align-items: center; justify-content: center;">刪除</button>
-    </form>
+<div id="recordShow">
+  {{#each recordData}}
+  <div class="row mt-3 border-bottom">
+
+    <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">
+      {{{ getImage this.category }}}
+    </div>
+
+    <div class="col-md-6">
+      <div>{{this.name}}</div>
+      <div>{{this.date}}</div>
+    </div>
+    <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">{{this.amount}}</div>
+    <div class="col-md-2  text-center align-items-center"
+      style="display: flex; align-items: center; justify-content: center;">
+      <a href="/edit/{{this._id}}" class="btn btn-info">修改</a>
+    </div>
+    <div class="col-md-2 text-center" style="display: flex; align-items: center; justify-content: center;">
+      <form action="/delete/{{this._id}}" method="POST">
+        <button class="btn btn-danger" type="submit"
+          style="display: flex; align-items: center; justify-content: center;">刪除</button>
+      </form>
+
+    </div>
 
   </div>
 
-</div>
-<div class="row mt-3 border-bottom">
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;"><i
-      class="fas fa-utensils"></i></div>
-  <div class="col-md-6">
-    <div>晚餐</div>
-    <div>2019/04/23</div>
-  </div>
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">60</div>
-  <div class="col-md-2  text-center align-items-center"
-    style="display: flex; align-items: center; justify-content: center;">
-    <a href="/edit" class="btn btn-info" id="">修改</a>
-  </div>
-  <div class="col-md-2 text-center" style="display: flex; align-items: center; justify-content: center;">
-    <form action="/delete" method="POST">
-      <button class="btn btn-danger" type="submit"
-        style="display: flex; align-items: center; justify-content: center;">刪除</button>
-    </form>
 
-  </div>
-
-</div>
-
-<div class="row mt-3 border-bottom">
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;"><i
-      class="fas fa-shuttle-van"></i></div>
-  <div class="col-md-6">
-    <div>捷運</div>
-    <div>2019/04/23</div>
-  </div>
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">120</div>
-  <div class="col-md-2  text-center align-items-center"
-    style="display: flex; align-items: center; justify-content: center;">
-    <a href="/edit" class="btn btn-info" id="">修改</a>
-  </div>
-  <div class="col-md-2 text-center" style="display: flex; align-items: center; justify-content: center;">
-    <form action="/delete" method="POST">
-      <button class="btn btn-danger" type="submit"
-        style="display: flex; align-items: center; justify-content: center;">刪除</button>
-    </form>
-
-  </div>
-
-</div>
-
-<div class="row mt-3 border-bottom">
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;"><i
-      class="fas fa-grin-beam"></i></div>
-  <div class="col-md-6">
-    <div>電影: 驚奇隊長</div>
-    <div>2019/04/23</div>
-  </div>
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">220</div>
-  <div class="col-md-2  text-center align-items-center"
-    style="display: flex; align-items: center; justify-content: center;">
-    <a href="/edit" class="btn btn-info" id="">修改</a>
-  </div>
-  <div class="col-md-2 text-center" style="display: flex; align-items: center; justify-content: center;">
-    <form action="/delete" method="POST">
-      <button class="btn btn-danger" type="submit"
-        style="display: flex; align-items: center; justify-content: center;">刪除</button>
-    </form>
-
-  </div>
-
-</div>
-
-<div class="row mt-3 border-bottom">
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;"><i class="fas fa-home"></i>
-  </div>
-  <div class="col-md-6">
-    <div>租金</div>
-    <div>2019/04/01</div>
-  </div>
-  <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">25000</div>
-  <div class="col-md-2  text-center align-items-center"
-    style="display: flex; align-items: center; justify-content: center;">
-    <a href="/edit" class="btn btn-info" id="">修改</a>
-  </div>
-  <div class="col-md-2 text-center" style="display: flex; align-items: center; justify-content: center;">
-    <form action="/delete" method="POST">
-      <button class="btn btn-danger" type="submit"
-        style="display: flex; align-items: center; justify-content: center;">刪除</button>
-    </form>
-
-  </div>
-
+  {{/each}}
 </div>
 
 
@@ -135,3 +57,61 @@
     <a href="/new" class="btn btn-secondary">新增支出</a>
   </div>
 </div>
+
+<script>
+  const category_image = ['<i class="fas fa-home"></i>',
+    '<i class="fas fa-shuttle-van"></i>',
+    '<i class="fas fa-grin-beam"></i>',
+    '<i class="fas fa-utensils"></i>',
+    '<i class="fas fa-pen"></i>']
+  const selector = document.querySelector('#filterSelector')
+  const amountShow = document.querySelector('#amountShow')
+  const recordShow = document.querySelector('#recordShow')
+  selector.addEventListener('change', () => {
+    const selectorValue = selector.value
+
+    console.log(selector.value)
+
+    axios.get(`/filterData/${selectorValue}`)
+      .then(resData => {
+        recordShow.innerHTML = ''
+        let money = 0
+        for (let i = 0; i < resData.data.length; i++) {
+          money += Number(resData.data[i].amount)
+          recordShow.innerHTML += `
+          <div class="row mt-3 border-bottom">
+
+    <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">
+      ${category_image[resData.data[i].category]}
+    </div>
+
+    <div class="col-md-6">
+      <div>${resData.data[i].name}</div>
+      <div>${resData.data[i].date}</div>
+    </div>
+    <div class="col-md-1" style="display: flex; align-items: center; justify-content: center;">${resData.data[i].amount}</div>
+    <div class="col-md-2  text-center align-items-center"
+      style="display: flex; align-items: center; justify-content: center;">
+      <a href="/edit/${resData.data[i]._id}" class="btn btn-info">修改</a>
+    </div>
+    <div class="col-md-2 text-center" style="display: flex; align-items: center; justify-content: center;">
+      <form action="/delete/${resData.data[i]._id}" method="POST">
+        <button class="btn btn-danger" type="submit"
+          style="display: flex; align-items: center; justify-content: center;">刪除</button>
+      </form>
+
+    </div>
+
+  </div>
+          `
+        }
+
+        amountShow.innerHTML = money
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+
+  })
+</script>

@@ -3,44 +3,100 @@
   <div class="col-md-4">請輸入你的支出</div>
 </div>
 
-<div class="row mt-3">
-  <div class="col-md-2">名稱<span class="text-danger">*</span></div>
-  <div class="col-md-4">
-    <input type="text" class="form-control">
+<form action="/edit/{{recordData._id}}" method="POST">
+  <div class="row mt-3">
+    <div class="col-md-2">名稱<span class="text-danger">*</span></div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" value="{{recordData.name}}" name="name">
+    </div>
   </div>
-</div>
 
-<div class="row mt-3">
-  <div class="col-md-2 text-danger">日期<span class="text-danger">*</span></div>
-  <div class="col-md-4">
-    <input id="date" type="date" value="2017-06-01" class="form-control">
+  <div class="row mt-3">
+    <div class="col-md-2 text-danger">日期<span class="text-danger">*</span></div>
+    <div class="col-md-4">
+      <input id="date" type="date" value="{{recordData.date}}" class="form-control" name="date">
+    </div>
   </div>
-</div>
 
-<div class="row mt-3">
-  <div class="col-md-2 text-danger">類別<span class="text-danger">*</span></div>
-  <div class="col-md-4">
-    <select class="custom-select">
-      <option selected>類別</option>
-      <option value="1">家居物業</option>
-      <option value="2">交通出行</option>
-      <option value="3">休閒娛樂</option>
-      <option value="4">餐飲娛樂</option>
-      <option value="5">其他</option>
-    </select>
+  <div class="row mt-3">
+    <div class="col-md-2 text-danger">類別<span class="text-danger">*</span></div>
+    <div class="col-md-4">
+      <select class="custom-select" name="category" id="categorySelect">
+        <option value="4">其他</option>
+        <option value="0">家居物業</option>
+        <option value="1">交通出行</option>
+        <option value="2">休閒娛樂</option>
+        <option value="3">餐飲食品</option>
+      </select>
+    </div>
   </div>
-</div>
 
-<div class="row mt-3">
-  <div class="col-md-2 text-danger">金額<span class="text-danger">*</span></div>
-  <div class="col-md-4">
-    <input type="text" class="form-control">
+  <div class="row mt-3">
+    <div class="col-md-2 text-danger">金額<span class="text-danger">*</span></div>
+    <div class="col-md-4">
+      <input type="text" class="form-control" value="{{recordData.amount}}" name="amount">
+    </div>
   </div>
-</div>
 
-<div class="row mt-3">
-  <div class="col-md-2 text-danger"></div>
-  <div class="col-md-4">
-    <div class="btn btn-danger" type="button">新增支出</div>
+  <div class="row mt-3">
+    <div class="col-md-2 text-danger"></div>
+    <div class="col-md-4">
+      <button class="btn btn-danger" type="submit">新增支出</button>
+    </div>
   </div>
-</div>
+</form>
+
+<script>
+
+  const selector = document.querySelector('#categorySelect')
+  selector.innerHTML = ''
+  if (`{{recordData.category}}` === '0') {
+    console.log('家居物業')
+    selector.innerHTML = `
+    <option value="4">其他</option>
+    <option value="0" selected>家居物業</option>
+    <option value="1">交通出行</option>
+    <option value="2">休閒娛樂</option>
+    <option value="3">餐飲食品</option>
+    `
+  } else if (`{{recordData.category}}` === '1') {
+    console.log('交通出行')
+    selector.innerHTML = `
+    <option value="4">其他</option>
+    <option value="0">家居物業</option>
+    <option value="1" selected>交通出行</option>
+    <option value="2">休閒娛樂</option>
+    <option value="3">餐飲食品</option>
+    `
+  } else if (`{{recordData.category}}` === '2') {
+    console.log('休閒娛樂')
+    selector.innerHTML = `
+    <option value="4">其他</option>
+    <option value="0">家居物業</option>
+    <option value="1">交通出行</option>
+    <option value="2" selected>休閒娛樂</option>
+    <option value="3">餐飲食品</option>
+    `
+  } else if (`{{recordData.category}}` === '3') {
+    console.log('餐飲食品')
+    selector.innerHTML = `
+    <option value="4">其他</option>
+    <option value="0">家居物業</option>
+    <option value="1">交通出行</option>
+    <option value="2">休閒娛樂</option>
+    <option value="3" selected>餐飲食品</option>
+    `
+  } else {
+    console.log('其他')
+    selector.innerHTML = `
+    <option value="4" selected>其他</option>
+    <option value="0">家居物業</option>
+    <option value="1">交通出行</option>
+    <option value="2">休閒娛樂</option>
+    <option value="3">餐飲食品</option>
+    `
+  }
+
+
+  recordData
+</script>
