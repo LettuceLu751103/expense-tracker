@@ -3,7 +3,7 @@
   <div class="col-md-4">請輸入你的支出</div>
 </div>
 
-<form action="/edit/{{recordData._id}}" method="POST">
+<form action="/record/edit/{{recordData._id}}" method="POST">
   <div class="row mt-3">
     <div class="col-md-2">名稱<span class="text-danger">*</span></div>
     <div class="col-md-4">
@@ -41,7 +41,7 @@
   <div class="row mt-3">
     <div class="col-md-2 text-danger"></div>
     <div class="col-md-4">
-      <button class="btn btn-danger" type="submit">新增支出</button>
+      <button class="btn btn-danger" type="submit">修改支出</button>
     </div>
   </div>
 </form>

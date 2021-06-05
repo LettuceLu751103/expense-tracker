@@ -1,7 +1,7 @@
 <div class="row mt-5">
   <div class="col-md-8">
     <select class="custom-select" id="filterSelector">
-      <option value="99" selected>類別</option>
+      <option value="99" selected>所有類別</option>
       <option value="0">家居物業</option>
       <option value="1">交通出行</option>
       <option value="2">休閒娛樂</option>
@@ -35,10 +35,10 @@
     <div class="col-1" style="display: flex; align-items: center; justify-content: center;">{{this.amount}}</div>
     <div class="col-2  text-center align-items-center"
       style="display: flex; align-items: center; justify-content: center;">
-      <a href="/edit/{{this._id}}" class="btn btn-info">修改</a>
+      <a href="/record/edit/{{this._id}}" class="btn btn-info">修改</a>
     </div>
     <div class="col-2 text-center" style="display: flex; align-items: center; justify-content: center;">
-      <form action="/delete/{{this._id}}" method="POST">
+      <form action="/record/delete/{{this._id}}" method="POST">
         <button class="btn btn-danger" type="submit"
           style="display: flex; align-items: center; justify-content: center;">刪除</button>
       </form>
@@ -53,8 +53,8 @@
 
 
 <div class="row mt-5">
-  <div class="col-md-8 text-center">
-    <a href="/new" class="btn btn-secondary">新增支出</a>
+  <div class="col-md-7 text-center">
+    <a href="/record/new" class="btn btn-secondary btn-block">新增支出</a>
   </div>
 </div>
 
@@ -70,7 +70,7 @@
   selector.addEventListener('change', () => {
     const selectorValue = selector.value
 
-    axios.get(`/filterData/${selectorValue}`)
+    axios.get(`/record/filterData/${selectorValue}`)
       .then(resData => {
         recordShow.innerHTML = ''
         let money = 0

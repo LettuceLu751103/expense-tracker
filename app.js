@@ -23,6 +23,10 @@ app.set('view engine', 'handlebars')
 // 載入靜態檔案
 app.use(express.static('public'))
 
+//引入路由器
+const routes = require('./routes')
+
+
 // 資料庫設定
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/todo-list'
 const mongoose = require('mongoose') // 載入 mongoose
@@ -42,6 +46,7 @@ db.once('open', () => {
 
 const Record = require('./models/record')
 
+
 // 設定 body-parser
 // 引用 body-parser
 const bodyParser = require('body-parser')
@@ -49,118 +54,10 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
+app.use(routes)
 
 
-app.get('/', (req, res) => {
-  Record.find()
-    .lean()
-    .then(data => {
-      let money = 0
-      for (let i = 0; i < data.length; i++) {
-        money += Number(data[i].amount)
-      }
-      res.render('index', { recordData: data, recordAmount: money })
-    })
-    .catch(error => {
-      console.log(error)
-    })
 
-})
-
-app.post('/', (req, res) => {
-  const reqData = req.body
-  console.log(reqData)
-  Record.create(reqData)
-    .then(() => {
-      res.redirect('/')
-    })
-    .catch(error => {
-      console.log(error)
-    })
-
-})
-
-app.get('/new', (req, res) => {
-  res.render('new')
-})
-
-app.get('/edit/:id', (req, res) => {
-  const id = req.params.id
-  Record.findById(id)
-    .lean()
-    .then(data => {
-      res.render('edit', { recordData: data })
-    })
-    .catch(error => {
-      console.log(error)
-    })
-
-})
-
-app.post('/edit/:id', (req, res) => {
-  const id = req.params.id
-  const editData = req.body
-  Record.findById(id)
-    .then(reqData => {
-      reqData.name = editData.name
-      reqData.date = editData.date
-      reqData.category = editData.category
-      reqData.amount = editData.amount
-      reqData.save()
-    })
-    .then(() => {
-      res.redirect('/')
-    })
-    .catch(error => {
-      console.log(error)
-    })
-
-})
-
-app.post('/delete/:id', (req, res) => {
-  const id = req.params.id
-  Record.findById(id)
-    .then(deleteOne => {
-      deleteOne.remove()
-    })
-    .then(() => {
-      res.redirect('/')
-    })
-    .catch(error => {
-      console.log(error)
-    })
-
-})
-
-app.get('/filterData/:category', (req, res) => {
-  const category = req.params.category
-  if (category === '99') {
-    console.log('請求全部資料')
-    Record.find()
-      .lean()
-      .then(filterData => {
-        console.log(filterData)
-        res.json(filterData)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
-  } else {
-    console.log('請求部分資料')
-    Record.find({ category })
-      .lean()
-      .then(filterData => {
-        console.log(filterData)
-        res.json(filterData)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-
-
-})
 
 app.listen(PORT, () => {
   console.log(`Server is Running at http://localhost:${PORT}`)
