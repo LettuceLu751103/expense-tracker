@@ -1,6 +1,6 @@
 
 // 資料庫設定
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/todo-list'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/expense-tracker'
 const mongoose = require('mongoose') // 載入 mongoose
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
 
