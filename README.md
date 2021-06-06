@@ -1,8 +1,8 @@
-## 專案名稱 [熱門餐廳搜尋網站]
-藉由NodeJS平台使用後端Express框架以及前端Bootstrap框架, 打造簡易的熱門餐廳搜索網站, 其中可以針對目前熱門餐廳進行排名, 搜尋, 以及獲得各熱門餐廳介紹...
+## 專案名稱 [個人開支統計網站]
+藉由NodeJS平台使用後端Express框架以及前端Bootstrap框架, 打造簡易的私房錢統計網站, 其中可以針對所有花費進行搜尋, 統計, 以及獲得各支出時間, 金額...
 
 ### 專案畫面
-![image](https://github.com/LettuceLu751103/restaurant_remote/blob/master/restaurant-login.png)
+![image](https://github.com/LettuceLu751103/expense-tracker/blob/master/expenseTrack-login.png)
 ![image](https://github.com/LettuceLu751103/restaurant_remote/blob/master/%E9%A4%90%E5%BB%B3%E6%B8%85%E5%96%AEv2.png)
 
 
