@@ -3,7 +3,7 @@
 
 ### 專案畫面
 ![image](https://github.com/LettuceLu751103/expense-tracker/blob/master/expenseTrack-login.png)
-![image](https://github.com/LettuceLu751103/restaurant_remote/blob/master/%E9%A4%90%E5%BB%B3%E6%B8%85%E5%96%AEv2.png)
+![image](https://github.com/LettuceLu751103/expense-tracker/blob/master/expense-tracker-index.png)
 
 
 
