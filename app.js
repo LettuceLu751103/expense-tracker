@@ -4,7 +4,7 @@ const session = require('express-session')
 const PORT = process.env.PORT || 3000
 
 const app = express()
-
+const flash = require('connect-flash')
 require('./config/mongoose')
 const category_image = ['<i class="fas fa-home"></i>',
   '<i class="fas fa-shuttle-van"></i>',
@@ -35,10 +35,12 @@ app.use(session({
 const usePassport = require('./config/passport')
 // 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
 usePassport(app)
-
+app.use(flash())  // 掛載套件
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')  // 設定 success_msg 訊息
+  res.locals.warning_msg = req.flash('warning_msg')  // 設定 warning_msg 訊息
   next()
 })
 
