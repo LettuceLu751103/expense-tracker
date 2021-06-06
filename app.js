@@ -1,6 +1,6 @@
 
 const express = require('express')
-
+const session = require('express-session')
 const PORT = process.env.PORT || 3000
 
 const app = express()
@@ -23,6 +23,13 @@ app.set('view engine', 'handlebars')
 
 // 載入靜態檔案
 app.use(express.static('public'))
+
+// 使用 express-session
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 //引入路由器
 const routes = require('./routes')
