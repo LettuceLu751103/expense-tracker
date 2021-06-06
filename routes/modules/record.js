@@ -12,8 +12,10 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-
-  Record.create(req.body)
+  const userId = req.user._id
+  const data = req.body
+  data.userId = userId
+  Record.create(data)
     .then(() => {
       res.redirect('/')
     })
@@ -24,10 +26,12 @@ router.post('/new', (req, res) => {
 })
 
 router.get('/edit/:id', (req, res) => {
-  const id = req.params.id
-  Record.findById(id)
+  const _id = req.params.id
+  const id = req.user._id
+  Record.findOne({ userId: id, _id: _id })
     .lean()
     .then(data => {
+      console.log(data)
       res.render('edit', { recordData: data })
     })
     .catch(error => {
@@ -37,9 +41,10 @@ router.get('/edit/:id', (req, res) => {
 })
 
 router.post('/edit/:id', (req, res) => {
-  const id = req.params.id
+  const _id = req.params.id
   const editData = req.body
-  Record.findById(id)
+  const userId = req.user._id
+  Record.findOne({ _id, userId })
     .then(reqData => {
       reqData.name = editData.name
       reqData.date = editData.date
@@ -58,7 +63,8 @@ router.post('/edit/:id', (req, res) => {
 
 router.post('/delete/:id', (req, res) => {
   const id = req.params.id
-  Record.findById(id)
+  const userId = req.user._id
+  Record.findOne({ _id: id, userId: userId })
     .then(deleteOne => {
       deleteOne.remove()
     })
