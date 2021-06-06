@@ -1,5 +1,5 @@
 <div class="row mt-5">
-  <div class="col-md-8">
+  <div class="col-md-4">
     <select class="custom-select" id="filterSelector">
       <option value="99" selected>所有類別</option>
       <option value="0">家居物業</option>
@@ -7,6 +7,23 @@
       <option value="2">休閒娛樂</option>
       <option value="3">餐飲娛樂</option>
       <option value="4">其他</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <select class="custom-select" id="filterSelector2">
+      <option value="99" selected>所有月份</option>
+      <option value="1">一月</option>
+      <option value="2">二月</option>
+      <option value="3">三月</option>
+      <option value="4">四月</option>
+      <option value="5">五月</option>
+      <option value="6">六月</option>
+      <option value="7">七月</option>
+      <option value="8">八月</option>
+      <option value="9">九月</option>
+      <option value="10">十月</option>
+      <option value="11">十一月</option>
+      <option value="12">十二月</option>
     </select>
   </div>
 </div>
@@ -65,11 +82,13 @@
     '<i class="fas fa-utensils"></i>',
     '<i class="fas fa-pen"></i>']
   const selector = document.querySelector('#filterSelector')
+  const selector2 = document.querySelector('#filterSelector2')
   const amountShow = document.querySelector('#amountShow')
   const recordShow = document.querySelector('#recordShow')
   selector.addEventListener('change', () => {
     const selectorValue = selector.value
-
+    const selectorValue2 = selector2.value
+    console.log('selectorValue: ' + selectorValue + ' selectorValue2: ' + selectorValue2)
     axios.get(`/record/filterData/${selectorValue}`)
       .then(resData => {
         recordShow.innerHTML = ''
@@ -90,10 +109,10 @@
     <div class="col-1" style="display: flex; align-items: center; justify-content: center;">${resData.data[i].amount}</div>
     <div class="col-2  text-center align-items-center"
       style="display: flex; align-items: center; justify-content: center;">
-      <a href="/edit/${resData.data[i]._id}" class="btn btn-info">修改</a>
+      <a href="/record/edit/${resData.data[i]._id}" class="btn btn-info">修改</a>
     </div>
     <div class="col-2 text-center" style="display: flex; align-items: center; justify-content: center;">
-      <form action="/delete/${resData.data[i]._id}" method="POST">
+      <form action="/record/delete/${resData.data[i]._id}" method="POST">
         <button class="btn btn-danger" type="submit"
           style="display: flex; align-items: center; justify-content: center;">刪除</button>
       </form>

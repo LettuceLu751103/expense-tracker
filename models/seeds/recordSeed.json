@@ -1,0 +1,39 @@
+{
+  "record": [
+    {
+      "name": "捷運",
+      "date": "2021-05-13",
+      "category": "1",
+      "merchant": "台灣高鐵",
+      "amount": "50"
+    },
+    {
+      "name": "看魔物獵人",
+      "date": "2021-05-18",
+      "category": "2",
+      "merchant": "美麗新影城",
+      "amount": "380"
+    },
+    {
+      "name": "房租",
+      "date": "2021-05-31",
+      "category": "0",
+      "merchant": "台北富邦",
+      "amount": "35000"
+    },
+    {
+      "name": "買特級牛五花",
+      "date": "2021-05-05",
+      "category": "3",
+      "merchant": "家樂福",
+      "amount": "5000"
+    },
+    {
+      "name": "捷運",
+      "date": "2021-05-16",
+      "category": "1",
+      "merchant": "台北捷運",
+      "amount": "50"
+    }
+  ]
+}

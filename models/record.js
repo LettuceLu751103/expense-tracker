@@ -36,6 +36,10 @@ const recordSchema = new Schema({
     ref: 'user',
     required: true,
     index: true
+  },
+  merchant: {
+    type: String,
+    required: true
   }
 })
 

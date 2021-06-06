@@ -15,6 +15,7 @@ router.post('/new', (req, res) => {
   const userId = req.user._id
   const data = req.body
   data.userId = userId
+  console.log(data)
   Record.create(data)
     .then(() => {
       res.redirect('/')
@@ -84,7 +85,7 @@ router.get('/filterData/:category', (req, res) => {
     Record.find()
       .lean()
       .then(filterData => {
-        console.log(filterData)
+        // console.log(filterData)
         res.json(filterData)
       })
       .catch(error => {
@@ -93,6 +94,7 @@ router.get('/filterData/:category', (req, res) => {
 
   } else {
     console.log('請求部分資料')
+    console.log(category)
     Record.find({ category })
       .lean()
       .then(filterData => {

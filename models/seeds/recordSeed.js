@@ -1,48 +1,53 @@
 const mongoose = require('mongoose')
-const Record = require('../record') // 載入 todo model
-mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
-const initData = [
-  {
-    name: '捷運',
-    date: '2021-05-13',
-    category: '1',
-    amount: '50'
-  },
-  {
-    name: '看魔物獵人',
-    date: '2021-05-18',
-    category: '2',
-    amount: '380'
-  },
-  {
-    name: '房租',
-    date: '2021-05-31',
-    category: '0',
-    amount: '35000'
-  },
-  {
-    name: '買特級牛五花',
-    date: '2021-05-05',
-    category: '3',
-    amount: '5000'
-  },
-  {
-    name: '捷運',
-    date: '2021-05-16',
-    category: '交通',
-    amount: '50'
-  }
+const Record = require('../record') // 載入 record model
+const User = require('../user') // 載入 user model
+mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
-]
+const initData = require('./recordSeed.json')
+
+const passport = require('passport')
+const bcrypt = require('bcryptjs')
+
+
 const db = mongoose.connection
 db.on('error', () => {
   console.log('mongodb error!')
 })
 db.once('open', async () => {
   console.log('mongodb connected!')
-  for (let i = 0; i < initData.length; i++) {
-    await Record.create(initData[i])
+
+
+  const user1Id = await User.find({ name: 'user1' })
+    .then(user => {
+      return user[0]._id
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  const user2Id = await User.find({ name: 'user2' })
+    .then(user => {
+      return user[0]._id
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+  for (let i = 0; i < initData.record.length; i++) {
+    if (i % 2 === 0) {
+      initData.record[i].userId = user1Id
+    } else {
+      initData.record[i].userId = user2Id
+    }
+    await Record.create(initData.record[i])
+      .then((dd) => {
+        console.log(dd)
+
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
+
   db.close()
-  console.log('done')
+
 })
