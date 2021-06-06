@@ -5,6 +5,9 @@ const PORT = process.env.PORT || 3000
 
 const app = express()
 const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 require('./config/mongoose')
 const category_image = ['<i class="fas fa-home"></i>',
   '<i class="fas fa-shuttle-van"></i>',
@@ -26,7 +29,7 @@ app.use(express.static('public'))
 
 // 使用 express-session
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
